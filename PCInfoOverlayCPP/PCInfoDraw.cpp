@@ -10,7 +10,10 @@ PCInfoDraw::PCInfoDraw()
 
 void PCInfoDraw::DrawStencil() {
 	if (this->ReadyToDraw) {
+		rect.left = 40;
+		rect.top = 10;
 		for (int i = 0; i < this->_stext.GetTextCount(); i++) {
+			rect.top += 50;
 			TextItem *textObj = this->_stext.GetTextItem(i);
 			hTmp = (HFONT)SelectObject(this->parentHandle, textObj->fontItem);
 			DrawText(this->parentHandle, textObj->ItemContent->c_str(), -1, &rect, DT_SINGLELINE | DT_NOCLIP);
@@ -26,15 +29,24 @@ void PCInfoDraw::RegisterStencil(HDC dcHandle, ScreenText text) {
 	SetBkMode(this->parentHandle, TRANSPARENT);
 	SetBkColor(this->parentHandle, RGB(0, 0, 0));
 	::UpdateWindow(0);
+
+	DeleteStencil();
 }
 
 void PCInfoDraw::Unregister() {
 	this->ReadyToDraw = false;
 }
+
+void PCInfoDraw::DeleteStencil() {
+	::InvalidateRect(0, &rect, TRUE);
+}
+
 PCInfoDraw::~PCInfoDraw()
 {
 	//DeleteObject(SelectObject(parentHandle, this->hTmp));
 	//::UpdateWindow(0);
 	::ReleaseDC(0, this->parentHandle);
 	::UpdateWindow(0);
+
+	DeleteStencil();
 }

@@ -6,6 +6,7 @@ public:
 	PCInfoDraw();
 	void RegisterStencil(HDC dcHandle, ScreenText text);
 	void DrawStencil();
+	void DeleteStencil();
 	void Unregister();
 	~PCInfoDraw();
 private:
