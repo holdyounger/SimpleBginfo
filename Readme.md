@@ -23,7 +23,7 @@
 
 ## 实现效果
 
-![drawtext](README/image-20231130170657136.png)
+![drawtext](./Readme/image-20231130170657136.png)
 
 ## Show your support
 
